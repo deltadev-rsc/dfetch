@@ -7,15 +7,15 @@ import (
 	"strings"
 )
 
-const RESET_COLOR = "\x1b[0m"
-const RED_COLOR = "\x1b[31m"
-const GREEN_COLOR = "\x1b[32m"
-const YELLOW_COLOR = "\x1b[33m"
-const BLUE_COLOR = "\x1b[34m"
-const MAGENTA_COLOR = "\x1b[35m"
-const CYAN_COLOR = "\x1b[36m"
+const RESET_COL = "\x1b[0m"
+const RED_COL = "\x1b[31m"
+const GREEN_COL = "\x1b[32m"
+const YELLOW_COL = "\x1b[33m"
+const BLUE_COL = "\x1b[34m"
+const MAGENTA_COL = "\x1b[35m"
+const CYAN_COL = "\x1b[36m"
 
-func getUserName() (string, error) {
+func nixGetUserName() (string, error) {
 	cmd := exec.Command("whoami")
 	output, err := cmd.Output()
 
@@ -27,7 +27,7 @@ func getUserName() (string, error) {
 	return username, nil
 }
 
-func getHostName() (string, error) {
+func nixGetHostName() (string, error) {
 	cmd := exec.Command("uname", "-n")
 	output, err := cmd.Output()
 
@@ -39,7 +39,7 @@ func getHostName() (string, error) {
 	return hostname, nil
 }
 
-func getOperatingSystemName() (string, error) {
+func nixGetOperatingSystemName() (string, error) {
 	cmd := exec.Command("uname", "-o")
 	output, err := cmd.Output()
 
@@ -51,7 +51,7 @@ func getOperatingSystemName() (string, error) {
 	return osname, nil
 }
 
-func getKernel() (string, error) {
+func nixGetKernel() (string, error) {
 	cmd := exec.Command("uname", "-sr")
 	output, err := cmd.Output()
 
@@ -63,7 +63,7 @@ func getKernel() (string, error) {
 	return kernel, nil
 }
 
-func getShell() (string) {
+func nixGetShell() (string) {
 	shell := "SHELL"
 
 	if val := os.Getenv(shell); val != "" {
@@ -85,7 +85,7 @@ func getShell() (string) {
 	return "Unknown"
 }
 
-func getDesktopEnvironment() (string) {
+func nixGetDesktopEnvironment() (string) {
 	vars := []string { "XDG_CURRENT_DESKTOP", "DESKTOP_SESSION", "GDMSESSION" }
 
 	for _, v := range vars {
@@ -97,7 +97,7 @@ func getDesktopEnvironment() (string) {
 	return "Unknown"
 }
 
-func getInit() (string) {
+func nixGetInit() (string) {
 	cmd := exec.Command("ps", "-p", "1", "-o", "comm=")
 	output, err := cmd.Output()
 
@@ -108,13 +108,13 @@ func getInit() (string) {
 	init := strings.TrimSpace(string(output))
 
 	if init == "init" {
-		return refineInit()
+		return nixRefineInit()
 	}
 
 	return init
 }
 
-func refineInit() (string) {
+func nixRefineInit() (string) {
 	if _, err := os.Stat("/run/openrc"); err == nil {
 		return "OpenRC"
 	}
@@ -131,29 +131,29 @@ func refineInit() (string) {
 }
 
 func NixFetch() {
-	username, err := getUserName()
-	hostname, err := getHostName()
-	osname, err := getOperatingSystemName()
-	kernel, err := getKernel()
-	shell := getShell()
-	de_wm := getDesktopEnvironment()
-	init := getInit()
+	username, err := nixGetUserName()
+	hostname, err := nixGetHostName()
+	osname, err := nixGetOperatingSystemName()
+	kernel, err := nixGetKernel()
+	shell := nixGetShell()
+	de_wm := nixGetDesktopEnvironment()
+	init := nixGetInit()
 	if err != nil {
 		fmt.Println("Ошибащка: ", err)
 		return
 	}
 
 	fmt.Println("")
-	fmt.Println(CYAN_COLOR, "          ▜█▙   ▜█▙  ▟█▀             ", RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "           ▜█▙   ██ ▟█▀              ", RESET_COLOR, CYAN_COLOR,  " User:", username,    RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "       ███████████▀ ██    ▟█▀        ", RESET_COLOR, MAGENTA_COLOR,  "───────────────────",  RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "           ▟█▀      ▜█▙ ▟██▀         ", RESET_COLOR, CYAN_COLOR,  "󰌢 Host:",    hostname, RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "          ▟█▀        ▜█▟██▀          ", RESET_COLOR, CYAN_COLOR,  " OS:",      osname,   RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "     ███████          ███████        ", RESET_COLOR, CYAN_COLOR,  " Kernel:",  kernel,   RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "       ▟██▜█▙        ▟██▀            ", RESET_COLOR, CYAN_COLOR,  " Shell:",   shell,    RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "      ▟█▀  ▜█▙      ▟█▀              ", RESET_COLOR, CYAN_COLOR,  " DE/WM:",   de_wm,    RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "            ▜██▙ ▜████████           ", RESET_COLOR, CYAN_COLOR,  " Init system:", init, RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "            ▟████▙   ▜█▙             ", RESET_COLOR, CYAN_COLOR,  "", RESET_COLOR)
-	fmt.Println(CYAN_COLOR, "           ▟█▀  ▜█▙   ▜█▙            ", RESET_COLOR, RED_COLOR,  "█", GREEN_COLOR, "█", YELLOW_COLOR, "█", BLUE_COLOR, "█", MAGENTA_COLOR, "█", CYAN_COLOR, "█", RESET_COLOR)
+	fmt.Println(CYAN_COL, "          ▜█▙   ▜█▙  ▟█▀             ", RESET_COL)
+	fmt.Println(CYAN_COL, "           ▜█▙   ██ ▟█▀              ", RESET_COL, CYAN_COL,  " User:", username,    RESET_COL)
+	fmt.Println(CYAN_COL, "       ███████████▀ ██    ▟█▀        ", RESET_COL, MAGENTA_COL,  "───────────────────",  RESET_COL)
+	fmt.Println(CYAN_COL, "           ▟█▀      ▜█▙ ▟██▀         ", RESET_COL, CYAN_COL,  "󰌢 Host:",    hostname, RESET_COL)
+	fmt.Println(CYAN_COL, "          ▟█▀        ▜█▟██▀          ", RESET_COL, CYAN_COL,  " OS:",      osname,   RESET_COL)
+	fmt.Println(CYAN_COL, "     ███████          ███████        ", RESET_COL, CYAN_COL,  " Kernel:",  kernel,   RESET_COL)
+	fmt.Println(CYAN_COL, "       ▟██▜█▙        ▟██▀            ", RESET_COL, CYAN_COL,  " Shell:",   shell,    RESET_COL)
+	fmt.Println(CYAN_COL, "      ▟█▀  ▜█▙      ▟█▀              ", RESET_COL, CYAN_COL,  " DE/WM:",   de_wm,    RESET_COL)
+	fmt.Println(CYAN_COL, "            ▜██▙ ▜████████           ", RESET_COL, CYAN_COL,  " Init system:", init, RESET_COL)
+	fmt.Println(CYAN_COL, "            ▟████▙   ▜█▙             ", RESET_COL, CYAN_COL,  "", RESET_COL)
+	fmt.Println(CYAN_COL, "           ▟█▀  ▜█▙   ▜█▙            ", RESET_COL, RED_COL,  "█", GREEN_COL, "█", YELLOW_COL, "█", BLUE_COL, "█", MAGENTA_COL, "█", CYAN_COL, "█", RESET_COL)
 	fmt.Println("")
 }
