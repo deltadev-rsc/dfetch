@@ -144,16 +144,16 @@ func DebianFetch() {
 	}
 
 	fmt.Println("")
-	fmt.Println(_RED_COLOR, " ", _RESET_COL)
-	fmt.Println(_RED_COLOR, "   ▟████████▙   ", _RESET_COLOR, _RED_COLOR,  " User:", username,    _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "  ▟█▛      ▜█▙  ", _RESET_COLOR, _MAGENTA_COLOR,  "───────────────────",  _RESET_COLOR)
-	fmt.Println(_RED_COLOR, " ██▛   ▟█   ▜█▙ ", _RESET_COLOR, _GREEN_COLOR,  "󰌢 Host:",    hostname, _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "██    ▟█     █▛ ", _RESET_COLOR, _GREEN_COLOR,  " OS:",      osname,  _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "██    ▜██████▛  ", _RESET_COLOR, _GREEN_COLOR,  " Kernel:",  kernel,  _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "▜█▙             ", _RESET_COLOR, _GREEN_COLOR,  " Shell:",   shell,   _RESET_COLOR)
-	fmt.Println(_RED_COLOR, " ▜█▙            ", _RESET_COLOR, _GREEN_COLOR,  " DE/WM:",   de_wm,   _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "  ▜█▙           ", _RESET_COLOR, _GREEN_COLOR,  " Init system:", init, _RESET_COLOR)
-	fmt.Println(_RED_COLOR, "   ▜█▙          ", _RESET_COLOR, _GREEN_COLOR,  "", _RESET_COLOR)
+	fmt.Println(_RED_COLOR, " ", _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "   ▟██████████▙   ", _RESET_COLOR, _RED_COLOR,  " User:", _RESET_COLOR, username, _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "  ▟█▛        ▜█▙  ", _RESET_COLOR, _MAGENTA_COLOR,  "───────────────────",  _RESET_COLOR)
+	fmt.Println(_RED_COLOR, " ██▛   ▟██    ▜█▙ ", _RESET_COLOR, _RED_COLOR,  "󰌢 Host:", _RESET_COLOR, hostname, _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "██    ▟█▛      ██", _RESET_COLOR, _RED_COLOR,  " OS:",  _RESET_COLOR, osname,  _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "██   ▟█▛      ▟█▛  ", _RESET_COLOR, _RED_COLOR,  " Kernel:", _RESET_COLOR, kernel,  _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "▜█▙  ▜█████████▛          ", _RESET_COLOR, _RED_COLOR,  " Shell:", _RESET_COLOR, shell,   _RESET_COLOR)
+	fmt.Println(_RED_COLOR, " ▜█▙            ", _RESET_COLOR, _RED_COLOR,  " DE/WM:", _RESET_COLOR, de_wm,   _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "  ▜█▙           ", _RESET_COLOR, _RED_COLOR,  " Init system:", _RESET_COLOR, init, _RESET_COLOR)
+	fmt.Println(_RED_COLOR, "   ▜█▙          ", _RESET_COLOR, _RED_COLOR,  "", _RESET_COLOR)
 	fmt.Println(_RED_COLOR, "    ▜█▙         ", _RESET_COLOR, _RED_COLOR,  "█",
 			_GREEN_COLOR, "█", _YELLOW_COLOR, "█",
 			_BLUE_COLOR,  "█", _MAGENTA_COLOR, "█", _CYAN_COLOR, "█", _RESET_COLOR)
