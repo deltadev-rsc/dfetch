@@ -44,6 +44,8 @@ func main() {
 	switch distro {
 		case "linuxmint":
 			distros.MintFetch()
+		case "debian":
+			distros.DebianFetch()
 		case "nixos":
 			distros.NixFetch()
 		case "artix":
