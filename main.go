@@ -52,6 +52,10 @@ func main() {
 			distros.ArtixFetch()
 		case "android":
 			distros.AndroidFetch()
+		case "arch":
+			distros.ArchFetch()
+		case "gentoo":
+			distros.GentooFetch()
 		default:
 			fmt.Printf("Дистрибутив %s не поддерживается dfetch\n", distro)
 	}
