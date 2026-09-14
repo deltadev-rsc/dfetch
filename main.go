@@ -17,21 +17,21 @@ func detectDistro() (string, error) {
   	defer file.Close()
 
    	scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-    	line := scanner.Text()
+	for scanner.Scan() {
+		line := scanner.Text()
 
-     	if strings.HasPrefix(line, "ID=") {
-      		id := strings.TrimPrefix(line, "ID=")
-        	id = strings.Trim(id, "\"")
-         	return id, nil
-      	}
-    }
+		if strings.HasPrefix(line, "ID=") {
+			id := strings.TrimPrefix(line, "ID=")
+			id = strings.Trim(id, "\"")
+			return id, nil
+		}
+	}
 
-    if err := scanner.Err(); err != nil {
-    	return "", err
-    }
+	if err := scanner.Err(); err != nil {
+		return "", err
+	}
 
-    return "", fmt.Errorf("ID не найден в /etc/os-release")
+	return "", fmt.Errorf("ID не найден в /etc/os-release")
 }
 
 func main() {
@@ -54,6 +54,8 @@ func main() {
 			distros.AndroidFetch()
 		case "arch":
 			distros.ArchFetch()
+		case "freebsd":
+			distros.FreebsdFetch()
 		case "gentoo":
 			distros.GentooFetch()
 		default:
